@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Function to find floor of x using binary search (divide and conquer)
+int findFloor(int arr[], int low, int high, int x) {
+// If x is smaller than the smallest element
+if (x < arr[0]) {
+return -1; // No floor exists
+}
+int mid;
+int floorValue = -1; // Initialize as "no floor found"
+while (low <= high) {
+mid = low + (high - low) / 2;
+if (arr[mid] == x) {
+return arr[mid]; // Exact match is the floor
+}
+else if (arr[mid] < x) {
+floorValue = arr[mid]; // Possible floor
+low = mid + 1; // Search right half
+}
+else {
+high = mid - 1; // Search left half
+}
+}
+return floorValue;
+}
+int main() {
+int n;
+if (scanf("%d", &n) != 1 || n <= 0) {
+return 0; // Invalid input
+}
+int *arr = malloc(n * sizeof(int));
+if (!arr) return 0; // Memory allocation failed
+for (int i = 0; i < n; i++) {
+if (scanf("%d", &arr[i]) != 1) {
+free(arr);
+return 0; // Invalid input
+}
+}
+int x;
+if (scanf("%d", &x) != 1) {
+free(arr);
+return 0;}
